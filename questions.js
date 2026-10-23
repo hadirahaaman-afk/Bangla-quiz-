@@ -1,3 +1,4 @@
+// প্রশ্নব্যাংক: নতুন প্রশ্ন নির্দিষ্ট বই ও অধ্যায়ের ভেতরে যোগ করা হবে.
 const questionBank = [
   {
     "id": "physics",
@@ -1302,7 +1303,7 @@ const questionBank = [
         "mcq": [],
         "short": [],
         "creative": [],
-        "placeholder": false,
+        "placeholder": true,
         "composition": [
           {
             "title": "The Wonders of Modern Science",

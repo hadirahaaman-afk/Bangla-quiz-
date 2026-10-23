@@ -18,3 +18,6 @@
 1. ZIP Extract করো।
 2. `index.html`, `style.css`, `script.js`, `questions.js`, `README.md` repository-র root-এ upload করে পুরোনো ফাইল replace করো।
 3. Commit changes করো। GitHub Pages branch/folder আগের মতো `main` / root-এ রাখো।
+
+
+Update: “The Wonders of Modern Science” is inside the existing English Second Paper → Composition chapter. No extra subject section was added.
