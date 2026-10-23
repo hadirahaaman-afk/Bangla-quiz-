@@ -5,14 +5,25 @@ function typeCount(s,type){return s.chapters.reduce((n,c)=>n+(type==="all"?(c.mc
 function renderSubjects(){
  const term=document.getElementById("searchInput").value.trim().toLowerCase(), filter=document.getElementById("typeFilter").value;
  const list=questionBank.filter(s=>(s.name+" "+s.description+" "+s.chapters.map(c=>c.name).join(" ")).toLowerCase().includes(term)&&(filter==="all"||typeCount(s,filter)>0));
- grid.innerHTML=list.length?list.map(s=>`<article class="subject-card"><div class="subject-icon" style="background:${s.color}">${s.icon}</div><h3>${s.name}</h3><p class="description">${s.description}</p><div class="subject-meta"><span class="tag">${s.chapters.length} অধ্যায়</span><span class="tag">MCQ ${typeCount(s,"mcq")}</span><span class="tag">সংক্ষিপ্ত ${typeCount(s,"short")}</span><span class="tag">সৃজনশীল ${typeCount(s,"creative")}</span></div><div class="card-actions"><button class="primary" data-open="${s.id}">অধ্যায় দেখো →</button></div></article>`).join(""):`<div class="empty-state">কোনো বিষয় পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজে দেখো।</div>`;
+ grid.innerHTML=list.length?list.map(s=>`<article class="subject-card"><div class="subject-icon" style="background:${s.color}">${s.icon}</div><h3>${s.name}</h3><p class="description">${s.description}</p><div class="subject-meta"><span class="tag">${s.chapters.length} অধ্যায়</span><span class="tag">MCQ ${typeCount(s,"mcq")}</span><span class="tag">সংক্ষিপ্ত ${typeCount(s,"short")}</span><span class="tag">সৃজনশীল ${typeCount(s,"creative")}</span></div><div class="card-actions"><button class="primary" data-open="${s.id}">অধ্যায় দেখো →</button>${s.id==="physics"?`<button data-full-test="${s.id}">পুরো বইয়ের MCQ পরীক্ষা</button>`:""}</div></article>`).join(""):`<div class="empty-state">কোনো বিষয় পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজে দেখো।</div>`;
  grid.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>openSubject(b.dataset.open,filter)));
+ grid.querySelectorAll("[data-full-test]").forEach(b=>b.addEventListener("click",()=>startFullBookTest(b.dataset.fullTest)));
 }
 function openSubject(id,filter="all"){
  activeSubject=questionBank.find(s=>s.id===id);modalSubject.textContent=activeSubject.name;modalTitle.textContent="অধ্যায় ও অনুশীলন";
  const chapters=activeSubject.chapters.filter(c=>filter==="all"||((c[filter]||[]).length>0));
  modalContent.innerHTML=`<div class="chapter-list">${chapters.map(c=>`<article class="chapter-item"><h3>${c.name}</h3><p>MCQ: ${(c.mcq||[]).length} · সংক্ষিপ্ত: ${(c.short||[]).length} · সৃজনশীল: ${(c.creative||[]).length}</p><div class="card-actions">${(c.mcq||[]).length?`<button class="primary" data-type="mcq" data-chapter="${c.id}">MCQ পরীক্ষা</button>`:""}${(c.short||[]).length?`<button data-type="short" data-chapter="${c.id}">সংক্ষিপ্ত প্রশ্ন</button>`:""}${(c.creative||[]).length?`<button data-type="creative" data-chapter="${c.id}">সৃজনশীল</button>`:""}</div></article>`).join("")}</div>`;
  modalContent.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>openPractice(b.dataset.chapter,b.dataset.type)));showModal();
+}
+
+function startFullBookTest(subjectId){
+ activeSubject=questionBank.find(s=>s.id===subjectId);
+ const combined=activeSubject.chapters.flatMap(c=>(c.mcq||[]).map(q=>({...q,chapterName:c.name})));
+ activeChapter={id:"full-book",name:"পুরো বই",mcq:combined};
+ modalSubject.textContent=activeSubject.name;
+ modalTitle.textContent="পুরো বইয়ের MCQ পরীক্ষা";
+ showModal();
+ startQuiz();
 }
 function findChapter(id){return activeSubject.chapters.find(c=>c.id===id)}
 function openPractice(id,type){activeChapter=findChapter(id);if(type==="mcq")startQuiz();else if(type==="short")renderShort();else renderCreative()}
@@ -21,7 +32,7 @@ function closeModal(){backdrop.classList.add("hidden");document.body.style.overf
 function startQuiz(){quizQuestions=activeChapter.mcq||[];answers=Array(quizQuestions.length).fill(null);questionIndex=0;renderQuestion()}
 function renderQuestion(){
  const q=quizQuestions[questionIndex];modalTitle.textContent=activeChapter.name+" — MCQ";modalSubject.textContent=activeSubject.name;
- modalContent.innerHTML=`<div class="quiz-meta"><span>প্রশ্ন ${questionIndex+1} / ${quizQuestions.length}</span><span>প্রতি প্রশ্নে ১ নম্বর</span></div><div class="panel-bar"><span style="width:${(questionIndex+1)/quizQuestions.length*100}%"></span></div><div class="question-text">${q.q}</div><div class="answers">${q.options.map((o,i)=>`<label class="answer ${answers[questionIndex]===i?"selected":""}"><input type="radio" name="answer" value="${i}" ${answers[questionIndex]===i?"checked":""}><span>${letters[i]||i+1}. ${o}</span></label>`).join("")}</div><div class="quiz-actions"><button class="quiz-btn" id="prev" ${questionIndex===0?"disabled":""}>← আগের প্রশ্ন</button><button class="quiz-btn primary" id="next">${questionIndex===quizQuestions.length-1?"পরীক্ষা জমা দাও":"পরের প্রশ্ন →"}</button></div>`;
+ modalContent.innerHTML=`<div class="quiz-meta"><span>প্রশ্ন ${questionIndex+1} / ${quizQuestions.length}</span><span>প্রতি প্রশ্নে ১ নম্বর</span></div><div class="panel-bar"><span style="width:${(questionIndex+1)/quizQuestions.length*100}%"></span></div><div class="question-text">${activeChapter.id==="full-book"?`<span class="tag">অধ্যায়: ${q.chapterName}</span><br>`:""}${q.q}</div><div class="answers">${q.options.map((o,i)=>`<label class="answer ${answers[questionIndex]===i?"selected":""}"><input type="radio" name="answer" value="${i}" ${answers[questionIndex]===i?"checked":""}><span>${letters[i]||i+1}. ${o}</span></label>`).join("")}</div><div class="quiz-actions"><button class="quiz-btn" id="prev" ${questionIndex===0?"disabled":""}>← আগের প্রশ্ন</button><button class="quiz-btn primary" id="next">${questionIndex===quizQuestions.length-1?"পরীক্ষা জমা দাও":"পরের প্রশ্ন →"}</button></div>`;
  modalContent.querySelectorAll('input[name="answer"]').forEach(el=>el.addEventListener("change",()=>{answers[questionIndex]=Number(el.value);modalContent.querySelectorAll(".answer").forEach((a,i)=>a.classList.toggle("selected",i===answers[questionIndex]))}));
  document.getElementById("prev").onclick=()=>{if(questionIndex>0){questionIndex--;renderQuestion()}};
  document.getElementById("next").onclick=()=>{if(answers[questionIndex]===null&&!confirm("এই প্রশ্নের উত্তর দাওনি। তবুও এগোবে?"))return;if(questionIndex<quizQuestions.length-1){questionIndex++;renderQuestion()}else showResult()};

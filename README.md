@@ -20,3 +20,9 @@
 - [10 Minute School — SSC Physics board question solutions](https://10minuteschool.com/content/category/board-question-bank/board-question-solution/ssc-board-question-solution/physics-ssc-board-question-solution/)
 - [Satt Academy — SSC Physics board questions](https://sattacademy.com/board-exams/নবম-দশম-শ্রেণি-মাধ্যমিক?subject=পদার্থবিজ্ঞান-পুরোনো-সংস্করণ)
 - [Somadhan — SSC Physics chapter question bank](https://somadhan.app/academic/ssc-science/ssc-পদার্থবিজ্ঞান)
+
+
+## এই সংস্করণে
+- সব প্রশ্ন, অপশন, উত্তর যাচাই, নম্বর ও ব্যাখ্যা ওয়েবসাইটের ভেতরেই চলে; পরীক্ষা দেওয়ার জন্য বাইরের সাইটে যাওয়ার দরকার নেই।
+- অধ্যায়ভিত্তিক পরীক্ষা এবং পুরো বইয়ের MCQ পরীক্ষা আছে।
+- বর্তমান ৭০টি MCQ অনুশীলনী প্রশ্ন। এগুলোকে আসল বোর্ড প্রশ্ন হিসেবে চিহ্নিত করা হয়নি। ২০১৫–২০২৬ সালের বোর্ড প্রশ্ন যাচাই করে পরে এই একই প্রশ্নব্যাংকে যোগ করতে হবে।
