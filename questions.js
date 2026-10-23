@@ -1,4 +1,3 @@
-// প্রশ্নগুলো ধাপে ধাপে যোগ করা হবে। physics-এর বিদ্যমান প্রশ্নগুলো অনুশীলনী হিসেবে চিহ্নিত।
 const questionBank = [
   {
     "id": "physics",
@@ -1303,7 +1302,26 @@ const questionBank = [
         "mcq": [],
         "short": [],
         "creative": [],
-        "placeholder": true
+        "placeholder": false,
+        "composition": [
+          {
+            "title": "The Wonders of Modern Science",
+            "alsoKnownAs": [
+              "The Blessings of Modern Science",
+              "Science in Everyday Life"
+            ],
+            "sourceNote": "তোমার পাঠানো বইয়ের ছবি থেকে টাইপ করা হয়েছে।",
+            "paragraphs": [
+              "Modern science has brought many wonderful changes to our lives. It has made the impossible possible and improved the quality of life for millions of people. From medicine to technology, science plays a key role in solving problems and creating new opportunities. We enjoy many comforts today because of scientific inventions and discoveries.",
+              "One of the greatest blessings of modern science is in the field of medicine. Diseases that were once deadly can now be cured easily. Vaccines and antibiotics have saved countless lives. New machines and equipment help doctors diagnose and treat illnesses more effectively. People now live longer and healthier lives, thanks to medical science.",
+              "Science has changed the way we communicate. Mobile phones, the internet, and computers have made it easy to connect with people worldwide. We can share information instantly, learn new things online, and work from home. This has made the world a smaller and more connected place. Thus, science has created new opportunities for education and business.",
+              "Science has brought great improvements in agriculture as well. Modern tools, machines, and farming techniques help farmers grow more crops in less time. The use of fertilizers, pesticides, and high-yield seeds has increased food production greatly. Irrigation methods have also improved, allowing farming in dry areas. Because of science, countries can now produce enough food to feed their growing populations and even export surplus food.",
+              "In everyday life, science is present in many forms. Electric power lights our homes, runs our appliances, and powers industries. Transportation has become fast and efficient with cars, trains, airplanes, and ships. Clean water and sanitation have reduced diseases and improved public health. Without these essential services, modern life would be impossible. Many regions would continue to struggle with poverty and illness without them.",
+              "Science plays a major role in entertainment and leisure. Television, radio, movies, and online streaming provide us with knowledge and fun. Video games and digital technology have created new ways to relax and learn. These inventions make life more enjoyable and interesting. They also help connect people across cultures and generations. Thus, they broaden our understanding and appreciation of the world.",
+              "The wonders of modern science have greatly improved our lives. We should appreciate and use science wisely for the betterment of humanity. While science brings many blessings, we must also be careful about its misuse. If we use science with care and responsibility, it will continue to help us create a brighter future."
+            ]
+          }
+        ]
       }
     ]
   },
@@ -2007,40 +2025,6 @@ const questionBank = [
         "short": [],
         "creative": [],
         "placeholder": true
-      }
-    ]
-  }
-,
-  {
-    "id": "english-2nd-paper",
-    "name": "ইংরেজি দ্বিতীয় পত্র",
-    "icon": "📝",
-    "color": "#fff0d9",
-    "description": "English 2nd Paper · Composition",
-    "chapters": [
-      {
-        "id": "english-2nd-composition",
-        "name": "Composition",
-        "mcq": [],
-        "short": [],
-        "creative": [],
-        "composition": [
-          {
-            "title": "The Wonders of Modern Science",
-            "alsoKnownAs": ["The Blessings of Modern Science", "Science in Everyday Life"],
-            "sourceNote": "তোমার পাঠানো বইয়ের ছবি থেকে টাইপ করা হয়েছে।",
-            "paragraphs": [
-              "Modern science has brought many wonderful changes to our lives. It has made the impossible possible and improved the quality of life for millions of people. From medicine to technology, science plays a key role in solving problems and creating new opportunities. We enjoy many comforts today because of scientific inventions and discoveries.",
-              "One of the greatest blessings of modern science is in the field of medicine. Diseases that were once deadly can now be cured easily. Vaccines and antibiotics have saved countless lives. New machines and equipment help doctors diagnose and treat illnesses more effectively. People now live longer and healthier lives, thanks to medical science.",
-              "Science has changed the way we communicate. Mobile phones, the internet, and computers have made it easy to connect with people worldwide. We can share information instantly, learn new things online, and work from home. This has made the world a smaller and more connected place. Thus, science has created new opportunities for education and business.",
-              "Science has brought great improvements in agriculture as well. Modern tools, machines, and farming techniques help farmers grow more crops in less time. The use of fertilizers, pesticides, and high-yield seeds has increased food production greatly. Irrigation methods have also improved, allowing farming in dry areas. Because of science, countries can now produce enough food to feed their growing populations and even export surplus food.",
-              "In everyday life, science is present in many forms. Electric power lights our homes, runs our appliances, and powers industries. Transportation has become fast and efficient with cars, trains, airplanes, and ships. Clean water and sanitation have reduced diseases and improved public health. Without these essential services, modern life would be impossible. Many regions would continue to struggle with poverty and illness without them.",
-              "Science plays a major role in entertainment and leisure. Television, radio, movies, and online streaming provide us with knowledge and fun. Video games and digital technology have created new ways to relax and learn. These inventions make life more enjoyable and interesting. They also help connect people across cultures and generations. Thus, they broaden our understanding and appreciation of the world.",
-              "The wonders of modern science have greatly improved our lives. We should appreciate and use science wisely for the betterment of humanity. While science brings many blessings, we must also be careful about its misuse. If we use science with care and responsibility, it will continue to help us create a brighter future."
-            ]
-          }
-        ],
-        "placeholder": false
       }
     ]
   }

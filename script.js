@@ -1,7 +1,7 @@
 const grid=document.getElementById("subjectGrid"), backdrop=document.getElementById("modalBackdrop"), modalContent=document.getElementById("modalContent"), modalTitle=document.getElementById("modalTitle"), modalSubject=document.getElementById("modalSubject");
 const letters=["ক","খ","গ","ঘ"]; let activeSubject=null,activeChapter=null,quizQuestions=[],answers=[],questionIndex=0;
 const allChapters=()=>questionBank.flatMap(s=>s.chapters.map(c=>({...c,subjectId:s.id,subjectName:s.name})));
-function typeCount(s,type){return s.chapters.reduce((n,c)=>n+(type==="all"?(c.mcq?.length||0)+(c.short?.length||0)+(c.creative?.length||0)+(c.composition?.length||0):(c[type]?.length||0)),0)}
+function typeCount(s,type){return s.chapters.reduce((n,c)=>n+(type==="all"?(c.mcq?.length||0)+(c.short?.length||0)+(c.creative?.length||0):(c[type]?.length||0)),0)}
 function renderSubjects(){
  const term=document.getElementById("searchInput").value.trim().toLowerCase(), filter=document.getElementById("typeFilter").value;
  const list=questionBank.filter(s=>(s.name+" "+s.description+" "+s.chapters.map(c=>c.name).join(" ")).toLowerCase().includes(term)&&(filter==="all"||typeCount(s,filter)>0));
@@ -11,8 +11,8 @@ function renderSubjects(){
 }
 function openSubject(id,filter="all"){
  activeSubject=questionBank.find(s=>s.id===id);modalSubject.textContent=activeSubject.name;modalTitle.textContent="অধ্যায় ও অনুশীলন";
- const chapters=activeSubject.chapters.filter(c=>filter==="all"||((c[filter]||[]).length>0)||(filter==="all"&&(c.composition||[]).length>0));
- modalContent.innerHTML=`<div class="chapter-list">${chapters.map(c=>`<article class="chapter-item"><h3>${c.name}</h3><p>MCQ: ${(c.mcq||[]).length} · সংক্ষিপ্ত: ${(c.short||[]).length} · সৃজনশীল: ${(c.creative||[]).length}${(c.composition||[]).length?` · Composition: ${(c.composition||[]).length}`:""}</p>${!(c.mcq||[]).length&&!(c.short||[]).length&&!(c.creative||[]).length&&!(c.composition||[]).length?`<p class="notice">এই অধ্যায়ের প্রশ্ন এখনো যোগ করা হয়নি। তুমি বইয়ের পৃষ্ঠা/প্রশ্নের ছবি দিলে এখানেই যোগ করব।</p>`:""}<div class="card-actions">${(c.mcq||[]).length?`<button class="primary" data-type="mcq" data-chapter="${c.id}">MCQ পরীক্ষা</button>`:""}${(c.short||[]).length?`<button data-type="short" data-chapter="${c.id}">সংক্ষিপ্ত প্রশ্ন</button>`:""}${(c.creative||[]).length?`<button data-type="creative" data-chapter="${c.id}">সৃজনশীল</button>`:""}${(c.composition||[]).length?`<button data-type="composition" data-chapter="${c.id}">Composition পড়ো</button>`:""}</div></article>`).join("")}</div>`;
+ const chapters=activeSubject.chapters.filter(c=>filter==="all"||((c[filter]||[]).length>0));
+ modalContent.innerHTML=`<div class="chapter-list">${chapters.map(c=>`<article class="chapter-item"><h3>${c.name}</h3><p>MCQ: ${(c.mcq||[]).length} · সংক্ষিপ্ত: ${(c.short||[]).length} · সৃজনশীল: ${(c.creative||[]).length}</p>${!(c.mcq||[]).length&&!(c.short||[]).length&&!(c.creative||[]).length?`<p class="notice">এই অধ্যায়ের প্রশ্ন এখনো যোগ করা হয়নি। তুমি বইয়ের পৃষ্ঠা/প্রশ্নের ছবি দিলে এখানেই যোগ করব।</p>`:""}<div class="card-actions">${(c.mcq||[]).length?`<button class="primary" data-type="mcq" data-chapter="${c.id}">MCQ পরীক্ষা</button>`:""}${(c.short||[]).length?`<button data-type="short" data-chapter="${c.id}">সংক্ষিপ্ত প্রশ্ন</button>`:""}${(c.creative||[]).length?`<button data-type="creative" data-chapter="${c.id}">সৃজনশীল</button>`:""}</div></article>`).join("")}</div>`;
  modalContent.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>openPractice(b.dataset.chapter,b.dataset.type)));showModal();
 }
 
@@ -26,13 +26,7 @@ function startFullBookTest(subjectId){
  startQuiz();
 }
 function findChapter(id){return activeSubject.chapters.find(c=>c.id===id)}
-function openPractice(id,type){activeChapter=findChapter(id);if(type==="mcq")startQuiz();else if(type==="short")renderShort();else if(type==="composition")renderComposition();else renderCreative()}
-function renderComposition(){
- const items=activeChapter.composition||[];
- modalTitle.textContent=activeChapter.name+" — Composition";modalSubject.textContent=activeSubject.name;
- modalContent.innerHTML=items.map((item,i)=>`<article class="review-item composition-item"><h3>${item.title}</h3>${item.alsoKnownAs?.length?`<p><b>বিকল্প শিরোনাম:</b> ${item.alsoKnownAs.join(" / ")}</p>`:""}${item.paragraphs.map(p=>`<p class="composition-paragraph">${p}</p>`).join("")}<button class="quiz-btn" data-copy-composition="${i}">শিরোনাম ও লেখা কপি করো</button></article>`).join("")+`<button class="quiz-btn" id="backChapters">← অধ্যায়ে ফিরো</button>`;
- modalContent.querySelectorAll("[data-copy-composition]").forEach(b=>b.onclick=async()=>{const item=items[Number(b.dataset.copyComposition)];const txt=[item.title,...(item.alsoKnownAs||[]),...item.paragraphs].join("\\n\\n");try{await navigator.clipboard.writeText(txt);b.textContent="কপি হয়েছে ✓"}catch(e){b.textContent="কপি করা যায়নি"}});document.getElementById("backChapters").onclick=()=>openSubject(activeSubject.id)
-}
+function openPractice(id,type){activeChapter=findChapter(id);if(type==="mcq")startQuiz();else if(type==="short")renderShort();else renderCreative()}
 function showModal(){backdrop.classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeModal(){backdrop.classList.add("hidden");document.body.style.overflow=""}
 function startQuiz(){quizQuestions=activeChapter.mcq||[];answers=Array(quizQuestions.length).fill(null);questionIndex=0;renderQuestion()}
