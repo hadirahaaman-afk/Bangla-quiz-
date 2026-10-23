@@ -1,152 +1,32 @@
-const subjects = [
-  {
-    id: "physics", name: "পদার্থবিজ্ঞান", icon: "⚛️", color: "#eaf1ff", textColor: "#2456c7",
-    description: "গতি, বল ও শক্তির প্রাথমিক ধারণা",
-    chapters: [{id:"motion", name:"গতি ও পরিমাপ", questions:[
-      {q:"দ্রুতির SI একক কোনটি?", options:["মিটার","মিটার/সেকেন্ড","কিলোগ্রাম","সেকেন্ড"], answer:1, explanation:"দ্রুতি = দূরত্ব ÷ সময়, তাই SI একক মিটার/সেকেন্ড।"},
-      {q:"কোনটি স্কেলার রাশি?", options:["সরণ","বেগ","ত্বরণ","দ্রুতি"], answer:3, explanation:"দ্রুতির শুধু মান আছে, নির্দিষ্ট দিক নেই; তাই এটি স্কেলার রাশি।"},
-      {q:"কোনো বস্তু ১০ সেকেন্ডে ৫০ মিটার গেলে গড় দ্রুতি কত?", options:["২ m/s","৫ m/s","১০ m/s","৫০ m/s"], answer:1, explanation:"গড় দ্রুতি = ৫০ ÷ ১০ = ৫ m/s।"}
-    ]}]
-  },
-  {
-    id: "chemistry", name: "রসায়ন", icon: "🧪", color: "#e8fbf5", textColor: "#14805e",
-    description: "পদার্থ, পরমাণু ও মৌলের পরিচয়",
-    chapters: [{id:"atom", name:"পরমাণুর গঠন", questions:[
-      {q:"একটি পরমাণুর নিউক্লিয়াসে সাধারণত কী থাকে?", options:["প্রোটন ও নিউট্রন","ইলেকট্রন ও প্রোটন","শুধু ইলেকট্রন","শুধু নিউট্রন"], answer:0, explanation:"সাধারণ পরমাণুর নিউক্লিয়াসে প্রোটন ও নিউট্রন থাকে; হাইড্রোজেন-১ এর নিউট্রন নেই।"},
-      {q:"ইলেকট্রনের আধান কেমন?", options:["ধনাত্মক","ঋণাত্মক","আধানহীন","পরিবর্তনশীল"], answer:1, explanation:"ইলেকট্রনের বৈদ্যুতিক আধান ঋণাত্মক।"},
-      {q:"মৌলের পারমাণবিক সংখ্যা কী নির্দেশ করে?", options:["নিউট্রনের সংখ্যা","প্রোটনের সংখ্যা","প্রোটন ও নিউট্রনের যোগফল","শক্তিস্তরের সংখ্যা"], answer:1, explanation:"পারমাণবিক সংখ্যা হলো নিউক্লিয়াসে প্রোটনের সংখ্যা।"}
-    ]}]
-  },
-  {
-    id: "biology", name: "জীববিজ্ঞান", icon: "🌿", color: "#eef8e8", textColor: "#4a842e",
-    description: "কোষ, উদ্ভিদ ও জীবনের প্রক্রিয়া",
-    chapters: [{id:"cell", name:"কোষ ও টিস্যু", questions:[
-      {q:"কোষের শক্তিঘর বলা হয় কোন অঙ্গাণুকে?", options:["রাইবোজোম","গলজি বডি","মাইটোকন্ড্রিয়া","নিউক্লিয়াস"], answer:2, explanation:"মাইটোকন্ড্রিয়ায় কোষীয় শ্বসনের মাধ্যমে ATP তৈরি হয় বলে একে শক্তিঘর বলা হয়।"},
-      {q:"উদ্ভিদ কোষের কোষপ্রাচীর প্রধানত কী দিয়ে গঠিত?", options:["প্রোটিন","সেলুলোজ","চর্বি","গ্লাইকোজেন"], answer:1, explanation:"উদ্ভিদ কোষের কোষপ্রাচীরের প্রধান উপাদান সেলুলোজ।"},
-      {q:"সালোকসংশ্লেষণ প্রধানত কোথায় ঘটে?", options:["মাইটোকন্ড্রিয়া","ক্লোরোপ্লাস্ট","নিউক্লিয়াস","রাইবোজোম"], answer:1, explanation:"ক্লোরোপ্লাস্টে ক্লোরোফিল থাকে এবং সেখানে সালোকসংশ্লেষণ ঘটে।"}
-    ]}]
-  },
-  {
-    id: "math", name: "গণিত", icon: "📐", color: "#fff3df", textColor: "#a66b0b",
-    description: "সংখ্যা, বীজগণিত ও জ্যামিতি",
-    chapters: [{id:"algebra", name:"বীজগণিতের ভিত্তি", questions:[
-      {q:"x + ৫ = ১২ হলে x-এর মান কত?", options:["৫","৬","৭","১৭"], answer:2, explanation:"x = ১২ − ৫ = ৭।"},
-      {q:"(a + b)² এর সঠিক বিস্তৃতি কোনটি?", options:["a² + b²","a² + 2ab + b²","a² − 2ab + b²","2a + 2b"], answer:1, explanation:"(a+b)² = a² + 2ab + b²।"},
-      {q:"ত্রিভুজের তিন কোণের সমষ্টি কত?", options:["৯০°","১৮০°","২৭০°","৩৬০°"], answer:1, explanation:"ইউক্লিডীয় সমতলে ত্রিভুজের অন্তঃকোণগুলোর সমষ্টি ১৮০°।"}
-    ]}]
-  },
-  {
-    id: "english", name: "ইংরেজি", icon: "🔤", color: "#f5eaff", textColor: "#8546b5",
-    description: "Grammar ও vocabulary অনুশীলন",
-    chapters: [{id:"grammar", name:"Basic Grammar", questions:[
-      {q:"Choose the correct sentence.", options:["She go to school.","She goes to school.","She going to school.","She gone to school."], answer:1, explanation:"Present simple tense-এ third-person singular subject-এর সঙ্গে সাধারণত verb-এর শেষে -s/-es যুক্ত হয়।"},
-      {q:"What is the plural of “child”?", options:["childs","childes","children","childrens"], answer:2, explanation:"“Child”-এর প্রচলিত plural হলো “children”।"},
-      {q:"Choose the opposite of “ancient”.", options:["old","historic","modern","past"], answer:2, explanation:"“Modern” হলো “ancient”-এর বিপরীতার্থক শব্দ।"}
-    ]}]
-  },
-  {
-    id: "ict", name: "তথ্য ও যোগাযোগ প্রযুক্তি", icon: "💻", color: "#e5f8ff", textColor: "#08799a",
-    description: "কম্পিউটার ও ডিজিটাল জগতের ধারণা",
-    chapters: [{id:"computer", name:"কম্পিউটারের ভিত্তি", questions:[
-      {q:"CPU-এর পূর্ণরূপ কী?", options:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Control Processing User"], answer:0, explanation:"CPU-এর পূর্ণরূপ Central Processing Unit।"},
-      {q:"নিচের কোনটি ইনপুট ডিভাইস?", options:["মনিটর","প্রিন্টার","কীবোর্ড","স্পিকার"], answer:2, explanation:"কীবোর্ড দিয়ে কম্পিউটারে তথ্য প্রবেশ করানো হয়।"},
-      {q:"বাইনারি সংখ্যা পদ্ধতিতে কোন দুটি অঙ্ক ব্যবহৃত হয়?", options:["০ ও ১","১ ও ২","০ থেকে ৯","A ও B"], answer:0, explanation:"বাইনারি সংখ্যা পদ্ধতিতে ০ এবং ১ ব্যবহৃত হয়।"}
-    ]}]
-  }
-];
-
-const subjectGrid = document.getElementById("subjectGrid");
-const backdrop = document.getElementById("quizBackdrop");
-const quizContent = document.getElementById("quizContent");
-const quizTitle = document.getElementById("quizTitle");
-const quizSubject = document.getElementById("quizSubject");
-let activeSubject = null, activeChapter = null, currentQuestion = 0, answers = [];
-
-function renderSubjects() {
-  subjectGrid.innerHTML = subjects.map(s => `
-    <article class="subject-card">
-      <div class="subject-icon" style="background:${s.color};color:${s.textColor}">${s.icon}</div>
-      <h3>${s.name}</h3><p>${s.description}</p>
-      <div class="subject-bottom"><span>${s.chapters.length}টি অধ্যায় · ${s.chapters.reduce((n,c)=>n+c.questions.length,0)}টি প্রশ্ন</span>
-      <button type="button" data-subject="${s.id}">কুইজ দেখো →</button></div>
-    </article>`).join("");
-  subjectGrid.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => showChapters(btn.dataset.subject)));
+const grid=document.getElementById("subjectGrid"), backdrop=document.getElementById("modalBackdrop"), modalContent=document.getElementById("modalContent"), modalTitle=document.getElementById("modalTitle"), modalSubject=document.getElementById("modalSubject");
+const letters=["ক","খ","গ","ঘ"]; let activeSubject=null,activeChapter=null,quizQuestions=[],answers=[],questionIndex=0;
+const allChapters=()=>questionBank.flatMap(s=>s.chapters.map(c=>({...c,subjectId:s.id,subjectName:s.name})));
+function typeCount(s,type){return s.chapters.reduce((n,c)=>n+(type==="all"?(c.mcq?.length||0)+(c.short?.length||0)+(c.creative?.length||0):(c[type]?.length||0)),0)}
+function renderSubjects(){
+ const term=document.getElementById("searchInput").value.trim().toLowerCase(), filter=document.getElementById("typeFilter").value;
+ const list=questionBank.filter(s=>(s.name+" "+s.description+" "+s.chapters.map(c=>c.name).join(" ")).toLowerCase().includes(term)&&(filter==="all"||typeCount(s,filter)>0));
+ grid.innerHTML=list.length?list.map(s=>`<article class="subject-card"><div class="subject-icon" style="background:${s.color}">${s.icon}</div><h3>${s.name}</h3><p class="description">${s.description}</p><div class="subject-meta"><span class="tag">${s.chapters.length} অধ্যায়</span><span class="tag">MCQ ${typeCount(s,"mcq")}</span><span class="tag">সংক্ষিপ্ত ${typeCount(s,"short")}</span><span class="tag">সৃজনশীল ${typeCount(s,"creative")}</span></div><div class="card-actions"><button class="primary" data-open="${s.id}">অধ্যায় দেখো →</button></div></article>`).join(""):`<div class="empty-state">কোনো বিষয় পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজে দেখো।</div>`;
+ grid.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>openSubject(b.dataset.open,filter)));
 }
-
-function showChapters(subjectId) {
-  activeSubject = subjects.find(s => s.id === subjectId);
-  quizSubject.textContent = activeSubject.name;
-  quizTitle.textContent = "একটি অধ্যায় বেছে নাও";
-  quizContent.innerHTML = `<p style="color:var(--muted)">নমুনা প্রশ্ন দিয়ে নিজের প্রস্তুতি যাচাই করো।</p><div class="review-list">${
-    activeSubject.chapters.map(c => `<article class="review-item"><h4>${c.name}</h4><p>${c.questions.length}টি বহুনির্বাচনি প্রশ্ন</p><button class="quiz-btn primary" type="button" data-chapter="${c.id}">পরীক্ষা শুরু →</button></article>`).join("")
-  }</div>`;
-  quizContent.querySelectorAll("button[data-chapter]").forEach(btn => btn.addEventListener("click", () => startQuiz(btn.dataset.chapter)));
-  backdrop.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
+function openSubject(id,filter="all"){
+ activeSubject=questionBank.find(s=>s.id===id);modalSubject.textContent=activeSubject.name;modalTitle.textContent="অধ্যায় ও অনুশীলন";
+ const chapters=activeSubject.chapters.filter(c=>filter==="all"||((c[filter]||[]).length>0));
+ modalContent.innerHTML=`<div class="chapter-list">${chapters.map(c=>`<article class="chapter-item"><h3>${c.name}</h3><p>MCQ: ${(c.mcq||[]).length} · সংক্ষিপ্ত: ${(c.short||[]).length} · সৃজনশীল: ${(c.creative||[]).length}</p><div class="card-actions">${(c.mcq||[]).length?`<button class="primary" data-type="mcq" data-chapter="${c.id}">MCQ পরীক্ষা</button>`:""}${(c.short||[]).length?`<button data-type="short" data-chapter="${c.id}">সংক্ষিপ্ত প্রশ্ন</button>`:""}${(c.creative||[]).length?`<button data-type="creative" data-chapter="${c.id}">সৃজনশীল</button>`:""}</div></article>`).join("")}</div>`;
+ modalContent.querySelectorAll("[data-type]").forEach(b=>b.addEventListener("click",()=>openPractice(b.dataset.chapter,b.dataset.type)));showModal();
 }
-
-function startQuiz(chapterId) {
-  activeChapter = activeSubject.chapters.find(c => c.id === chapterId);
-  currentQuestion = 0;
-  answers = Array(activeChapter.questions.length).fill(null);
-  renderQuestion();
+function findChapter(id){return activeSubject.chapters.find(c=>c.id===id)}
+function openPractice(id,type){activeChapter=findChapter(id);if(type==="mcq")startQuiz();else if(type==="short")renderShort();else renderCreative()}
+function showModal(){backdrop.classList.remove("hidden");document.body.style.overflow="hidden"}
+function closeModal(){backdrop.classList.add("hidden");document.body.style.overflow=""}
+function startQuiz(){quizQuestions=activeChapter.mcq||[];answers=Array(quizQuestions.length).fill(null);questionIndex=0;renderQuestion()}
+function renderQuestion(){
+ const q=quizQuestions[questionIndex];modalTitle.textContent=activeChapter.name+" — MCQ";modalSubject.textContent=activeSubject.name;
+ modalContent.innerHTML=`<div class="quiz-meta"><span>প্রশ্ন ${questionIndex+1} / ${quizQuestions.length}</span><span>প্রতি প্রশ্নে ১ নম্বর</span></div><div class="panel-bar"><span style="width:${(questionIndex+1)/quizQuestions.length*100}%"></span></div><div class="question-text">${q.q}</div><div class="answers">${q.options.map((o,i)=>`<label class="answer ${answers[questionIndex]===i?"selected":""}"><input type="radio" name="answer" value="${i}" ${answers[questionIndex]===i?"checked":""}><span>${letters[i]||i+1}. ${o}</span></label>`).join("")}</div><div class="quiz-actions"><button class="quiz-btn" id="prev" ${questionIndex===0?"disabled":""}>← আগের প্রশ্ন</button><button class="quiz-btn primary" id="next">${questionIndex===quizQuestions.length-1?"পরীক্ষা জমা দাও":"পরের প্রশ্ন →"}</button></div>`;
+ modalContent.querySelectorAll('input[name="answer"]').forEach(el=>el.addEventListener("change",()=>{answers[questionIndex]=Number(el.value);modalContent.querySelectorAll(".answer").forEach((a,i)=>a.classList.toggle("selected",i===answers[questionIndex]))}));
+ document.getElementById("prev").onclick=()=>{if(questionIndex>0){questionIndex--;renderQuestion()}};
+ document.getElementById("next").onclick=()=>{if(answers[questionIndex]===null&&!confirm("এই প্রশ্নের উত্তর দাওনি। তবুও এগোবে?"))return;if(questionIndex<quizQuestions.length-1){questionIndex++;renderQuestion()}else showResult()};
 }
-
-function renderQuestion() {
-  const q = activeChapter.questions[currentQuestion];
-  quizTitle.textContent = activeChapter.name;
-  quizSubject.textContent = activeSubject.name;
-  quizContent.innerHTML = `
-    <div class="quiz-meta"><span>প্রশ্ন ${currentQuestion+1} / ${activeChapter.questions.length}</span><span>প্রতি প্রশ্নে ১ নম্বর</span></div>
-    <div class="progress" style="margin-bottom:20px"><span style="width:${((currentQuestion+1)/activeChapter.questions.length)*100}%"></span></div>
-    <div class="question-text">${q.q}</div>
-    <div class="answers">${q.options.map((option,i)=>`
-      <label class="answer ${answers[currentQuestion]===i?'selected':''}">
-        <input type="radio" name="answer" value="${i}" ${answers[currentQuestion]===i?'checked':''}>
-        <span>${["ক","খ","গ","ঘ"][i]}. ${option}</span>
-      </label>`).join("")}</div>
-    <div class="quiz-actions">
-      <button class="quiz-btn" id="prevQuestion" ${currentQuestion===0?'disabled':''}>← আগের প্রশ্ন</button>
-      <button class="quiz-btn primary" id="nextQuestion">${currentQuestion===activeChapter.questions.length-1?'পরীক্ষা জমা দাও':'পরের প্রশ্ন →'}</button>
-    </div>`;
-  quizContent.querySelectorAll('input[name="answer"]').forEach(input => input.addEventListener("change", () => {
-    answers[currentQuestion] = Number(input.value);
-    quizContent.querySelectorAll(".answer").forEach((el,i)=>el.classList.toggle("selected",i===answers[currentQuestion]));
-  }));
-  document.getElementById("prevQuestion").addEventListener("click",()=>{if(currentQuestion>0){currentQuestion--;renderQuestion();}});
-  document.getElementById("nextQuestion").addEventListener("click",()=>{
-    if(answers[currentQuestion]===null){
-      const proceed = confirm("এই প্রশ্নের উত্তর বেছে নাওনি। তবুও কি এগোতে চাও?");
-      if(!proceed)return;
-    }
-    if(currentQuestion<activeChapter.questions.length-1){currentQuestion++;renderQuestion();}
-    else showResult();
-  });
-}
-
-function showResult() {
-  const qs = activeChapter.questions;
-  const score = qs.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
-  const percent = Math.round(score/qs.length*100);
-  const message = percent===100?"দারুণ! সব উত্তর সঠিক হয়েছে।":percent>=60?"ভালো চেষ্টা! আরেকবার অনুশীলন করো।":"হাল ছেড়ো না—উত্তরগুলো দেখে আবার চেষ্টা করো।";
-  quizTitle.textContent = "তোমার ফলাফল";
-  quizContent.innerHTML = `
-    <div class="result-score"><strong>${score} / ${qs.length}</strong><span>${percent}% নম্বর · ${message}</span></div>
-    <h3 style="margin:0 0 12px">উত্তর পর্যালোচনা</h3>
-    <div class="review-list">${qs.map((q,i)=>`<article class="review-item">
-      <h4>${i+1}. ${q.q}</h4>
-      <p class="${answers[i]===q.answer?'correct':'incorrect'}">${answers[i]===q.answer?'✓ সঠিক উত্তর':'✕ তোমার উত্তর: '+(answers[i]===null?'উত্তর দাওনি':q.options[answers[i]])}</p>
-      <p><strong>সঠিক উত্তর:</strong> ${["ক","খ","গ","ঘ"][q.answer]}. ${q.options[q.answer]}</p>
-      <p style="color:var(--muted)">${q.explanation}</p>
-    </article>`).join("")}</div>
-    <div class="result-actions"><button class="quiz-btn primary" id="retryQuiz">আবার পরীক্ষা দাও</button><button class="quiz-btn" id="backHome">অন্য বিষয় বেছে নাও</button></div>`;
-  document.getElementById("retryQuiz").addEventListener("click",()=>startQuiz(activeChapter.id));
-  document.getElementById("backHome").addEventListener("click",closeModal);
-}
-
-function closeModal() {backdrop.classList.add("hidden");document.body.style.overflow="";}
-
-document.getElementById("closeQuiz").addEventListener("click",closeModal);
-backdrop.addEventListener("click",e=>{if(e.target===backdrop)closeModal();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!backdrop.classList.contains("hidden"))closeModal();});
-renderSubjects();
+function showResult(){const score=quizQuestions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0),pct=Math.round(score/quizQuestions.length*100);modalTitle.textContent="তোমার ফলাফল";modalSubject.textContent=activeSubject.name;modalContent.innerHTML=`<div class="result-score"><strong>${score} / ${quizQuestions.length}</strong><span>${pct}% নম্বর — ${pct===100?"দারুণ! সব উত্তর সঠিক।":pct>=60?"ভালো চেষ্টা! আবার অনুশীলন করো।":"উত্তরগুলো দেখে আবার চেষ্টা করো।"}</span></div><h3>উত্তর পর্যালোচনা</h3><div class="review-list">${quizQuestions.map((q,i)=>`<article class="review-item"><h4>${i+1}. ${q.q}</h4><p class="${answers[i]===q.answer?"correct":"incorrect"}">${answers[i]===q.answer?"✓ সঠিক":answers[i]===null?"উত্তর দেওয়া হয়নি":"✕ তোমার উত্তর: "+q.options[answers[i]]}</p><p><b>সঠিক উত্তর:</b> ${letters[q.answer]}. ${q.options[q.answer]}</p><p>${q.explanation||""}</p></article>`).join("")}</div><div class="result-actions"><button class="quiz-btn primary" id="retry">আবার পরীক্ষা</button><button class="quiz-btn" id="chapters">অধ্যায়ে ফিরো</button></div>`;document.getElementById("retry").onclick=startQuiz;document.getElementById("chapters").onclick=()=>openSubject(activeSubject.id)}
+function renderShort(){const qs=activeChapter.short||[];modalTitle.textContent=activeChapter.name+" — সংক্ষিপ্ত প্রশ্ন";modalSubject.textContent=activeSubject.name;modalContent.innerHTML=`<p>প্রথমে নিজের খাতায় উত্তর লেখো, তারপর নমুনা উত্তর দেখো।</p><div class="review-list">${qs.map((q,i)=>`<article class="review-item"><h4>${i+1}. ${q.q}</h4><textarea class="answer-box" placeholder="এখানে নিজের উত্তর লিখতে পারো…"></textarea><button class="quiz-btn primary reveal" data-i="${i}">নমুনা উত্তর দেখো</button><div class="sample-answer hidden" id="sample${i}"><h4>নমুনা উত্তর</h4><p>${q.sample}</p></div></article>`).join("")}</div><button class="quiz-btn" id="backChapters">← অধ্যায়ে ফিরো</button>`;modalContent.querySelectorAll(".reveal").forEach(b=>b.onclick=()=>document.getElementById("sample"+b.dataset.i).classList.toggle("hidden"));document.getElementById("backChapters").onclick=()=>openSubject(activeSubject.id)}
+function renderCreative(){const qs=activeChapter.creative||[];modalTitle.textContent=activeChapter.name+" — সৃজনশীল প্রশ্ন";modalSubject.textContent=activeSubject.name;modalContent.innerHTML=qs.map((q,i)=>`<article class="review-item"><h4>উদ্দীপক ${i+1}</h4><p>${q.stem}</p>${q.parts.map(p=>`<div class="creative-part"><b>${p[0]}. ${p[1]}</b><textarea class="answer-box" placeholder="এখানে উত্তর লেখো…"></textarea></div>`).join("")}<p class="notice">এই প্রশ্নের জন্য নমুনা উত্তর এখনো যোগ করা হয়নি। পাঠ্যবই ও শিক্ষকের নির্দেশনা অনুযায়ী উত্তর যাচাই করো।</p></article>`).join("")+`<button class="quiz-btn" id="backChapters">← অধ্যায়ে ফিরো</button>`;document.getElementById("backChapters").onclick=()=>openSubject(activeSubject.id)}
+document.getElementById("searchInput").addEventListener("input",renderSubjects);document.getElementById("typeFilter").addEventListener("change",renderSubjects);document.getElementById("closeModal").addEventListener("click",closeModal);backdrop.addEventListener("click",e=>{if(e.target===backdrop)closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!backdrop.classList.contains("hidden"))closeModal()});renderSubjects();
